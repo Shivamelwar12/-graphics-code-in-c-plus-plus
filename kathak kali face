@@ -1,0 +1,229 @@
+/*
+Name of software    ::  Kathakali..
+Programmer          ::  shivam elwar
+Email 				::	shivamelwar40@gmail.com
+Developing Tools    ::  Turboc   C/C++ (graphics..)
+*/
+#include <conio.h>
+#include <graphics.h>
+
+//functions
+// creating a class for the main window with page..
+int main()
+{
+    int gd=DETECT,gm;
+    int b,sx,sy,z,col,x1,y1,w1,z1,prevx,prevy;
+    //struct SREGS s;
+    struct palettetype pal;
+    getpalette(&pal);
+    initgraph(&gd,&gm,(char*)"C:\\tc\\bgi");
+    //Logo
+    settextstyle(1,0,5);
+    setpalette(7,24);
+    setpalette(11,15);
+    int x,y;
+    x=0;
+    y=0;
+	// getting maximum width
+    int we=getmaxx();
+	//getting maximum height
+    z=getmaxy();
+    setcolor(11);
+    rectangle(x+80,y+80,we-100,z-80);
+    setfillstyle(1,7);
+    bar(x+81,y+81,we-101,z-81);
+    setlinestyle(3,0,0);
+    setcolor(14);
+    rectangle(x+83,y+83,we-103,z-83);
+    setlinestyle(0,0,0);
+    setcolor(0);
+    rectangle(x+86,y+86,we-106,z-86);
+    // Finish drawing the splash window
+    putpixel(303,98,0);
+    setfillstyle(5,2);
+    fillellipse(303,146,40,40);
+    setfillstyle(9,6);
+    fillellipse(303,146,36,36);
+    setfillstyle(1,9);
+    fillellipse(303,146,32,32);
+    setfillstyle(1,7);
+    bar(260,169,338,190);
+    setfillstyle(1,12);
+    fillellipse(278,170,10,10);
+    setfillstyle(1,4);
+    fillellipse(278,170,8,8);
+    fillellipse(278,170,7,7);
+    setfillstyle(1,2);
+    fillellipse(278,170,5,5);
+    setfillstyle(1,5);
+    fillellipse(278,170,2,2);
+    fillellipse(278,185,5,5);
+    setfillstyle(1,9);
+    fillellipse(278,185,3,3);
+    setfillstyle(1,3);
+    fillellipse(278,185,1,1);
+    setfillstyle(1,7);
+    fillellipse(283,138,2,2);
+    fillellipse(323,138,2,2);
+    fillellipse(287,203,3,3);
+    fillellipse(277,147,3,3);
+    fillellipse(285,128,2,2);
+    fillellipse(291,120,1,1);
+    line(287,150,312,150);
+    line(287,152,312,152);
+    putpixel(303,172,0);
+    moveto(303,172);
+    lineto(297,169);
+    lineto(286,176);
+    moveto(303,172);
+    lineto(310,169);
+    lineto(319,176);
+    moveto(286,163);
+    lineto(320,163);
+    bar(301,104,306,119);
+    moveto(303,98);
+    lineto(307,110);
+    lineto(307,114);
+    lineto(314,127);
+    lineto(308,141);
+    lineto(316,144);
+    lineto(319,149);
+    lineto(320,163);  //
+    moveto(286,163);
+    lineto(287,149);
+    lineto(290,144);
+    lineto(298,141);
+    lineto(292,127);
+    lineto(300,114);
+    lineto(300,110);
+    lineto(303,98);
+    line(286,161,320,161);
+    line(298,140,309,140);
+    line(295,143,310,143);
+    line(294,131,312,131);
+    line(297,119,310,119);
+    moveto(288,168);
+    lineto(303,166);
+    lineto(317,168);
+    moveto(283,182);
+    lineto(279,196);
+    lineto(277,202);
+    lineto(278,205);
+    lineto(280,207);
+    lineto(288,209);
+    lineto(295,209);
+    lineto(299,210);
+    lineto(303,214);
+    moveto(303,223);
+    lineto(293,220);
+    lineto(286,221);
+    lineto(278,220);
+    lineto(271,219);
+    lineto(267,216);
+    lineto(264,212);
+    lineto(263,207);
+    lineto(264,204);
+    lineto(267,200);
+    lineto(272,197);
+    lineto(276,194);
+    lineto(281,189);
+    //  lip
+    moveto(302,201);
+    lineto(299,199);
+    lineto(291,203);
+    lineto(296,205);
+    lineto(302,205);
+    moveto(291,203);
+    lineto(302,203);
+    ellipse(297,193,90,360,2,2);
+    ellipse(301,195,180,350,3,2);
+    moveto(300,179);
+    lineto(291,176);
+    lineto(285,179);
+    lineto(285,182);
+    lineto(291,179);
+    lineto(300,179);
+    moveto(300,184);
+    lineto(294,181);
+    lineto(286,184);
+    lineto(295,187);
+    lineto(300,184);
+    setfillstyle(1,8);
+    floodfill(293,184,0);
+    setfillstyle(1,1);
+    fillellipse(294,184,2,2);
+    setfillstyle(1,10);
+    fillellipse(294,184,1,1);
+    setfillstyle(1,12);
+    floodfill(287,202,0);
+    setfillstyle(1,1);
+    floodfill(291,178,0);
+    // Copying left side pixel to right side
+    int nex;
+    int c1,c2;
+    for(x1=96;x1<229;++x1)
+    {
+        w1=219;
+        z1=302;
+        nex=z1;
+	while(w1<z1)
+        {
+            //    c1=getpixel(w1,x1);
+            c2=getpixel(z1,x1);
+            //    putpixel(z1,x1,c1);
+            putpixel(nex++,x1,c2);
+            w1++;
+            z1--;
+        }
+    }
+    // copying left side to right side
+    setfillstyle(1,12);
+    fillellipse(303,175,1,2);
+    //pottu
+    setfillstyle(1,15);
+    floodfill(328,210,0);
+    setfillstyle(1,12);
+    floodfill(304,201,0);
+    floodfill(304,204,0);
+    setfillstyle(1,2);
+    floodfill(315,191,0);
+    setfillstyle(1,14);
+    floodfill(302,116,0);
+    setfillstyle(11,13);
+    floodfill(300,125,0);
+    setfillstyle(9,13);
+    floodfill(303,135,0);
+    setfillstyle(9,9);
+    floodfill(287,141,0);
+    floodfill(313,139,0);
+    setfillstyle(1,12);
+    floodfill(277,147,0);
+    floodfill(327,147,0);
+    setfillstyle(1,14);
+    floodfill(283,138,0);
+    floodfill(321,138,0);
+    setfillstyle(1,11);
+    floodfill(285,129,0);
+    floodfill(318,129,0);
+    setfillstyle(1,12);
+    floodfill(303,157,0);
+    setfillstyle(1,14);
+    floodfill(302,168,0);
+    floodfill(301,142,0);
+    setfillstyle(1,10);
+    floodfill(302,147,0);
+    setfillstyle(1,1);
+    floodfill(302,164,0);
+    setfillstyle(1,15);
+    floodfill(302,162,0);
+    settextstyle(2,0,0);
+    setcolor(14);
+    outtextxy(218,292,(char*)"Developed By :: Shivam Elwar");
+    setcolor(15);
+    outtextxy(268,262,(char*)"https://t.me/Btcupdate15");
+    setcolor(11);
+    outtextxy(238,332,(char*)"Email : shivamelwar40@gmail.com");
+    getch();
+    cleardevice();
+}
+//end
