@@ -1,0 +1,202 @@
+#include <stdio.h>
+
+  #include <conio.h>
+
+  #include <graphics.h>
+
+  #include <dos.h>
+
+
+
+  /* color and movement of ball */
+
+  void ball_motion(int *x, int *y, int *flag, int *i, int val, int tmp) {
+
+                int maxy = getmaxy();
+
+
+
+                /* set the drawing color */
+
+                setcolor(RED);
+
+
+
+                /* color of the ball */
+
+                setfillstyle(SOLID_FILL, YELLOW);
+
+
+
+                /* draw ball at the given position */
+
+                pieslice(*x, *y, 0, 360, 10);
+
+
+
+                /* subsequent position of ball in x - axis */
+
+                if (*i % 5 == 0) {
+
+                        if (tmp) {
+
+                                *x = *x + 3;
+
+                        } else {
+
+                                *x = *x - 3;
+
+                        }
+
+                        *i = 0;
+
+                }
+
+
+
+                /* subsequent position of ball in y-axis */
+
+                if (*flag) {
+
+                        *y = *y - 10;
+
+                } else {
+
+                        *y = *y + 10;
+
+                }
+
+
+
+                /* reached y axis maximum */
+
+                if (*y >= maxy) {
+
+                        *flag = 1;
+
+                } else if (*y <= val) {
+
+                        /* reached y axix minimum */
+
+                        *flag = 0;
+
+                }
+
+
+
+                *i = *i + 1;
+
+                return;
+
+  }
+
+
+
+
+
+  int main() {
+
+        /* request auto detection */
+
+        int gdriver = DETECT, gmode, err;
+
+        int x[4], y[4], stage[4], i, k = 0;
+
+        int flag[] = {0, 1, 0, 1};
+
+        int maxy, midy;
+
+
+
+        /* initialize graphic mode */
+
+        initgraph(&gdriver, &gmode, (char*)"C:/TURBOC3/BGI");
+
+        err = graphresult();
+
+
+
+        if (err != grOk) {
+
+                /* error occurred */
+
+                printf("Graphics Error: %s\n",
+
+                                grapherrormsg(err));
+
+                return 0;
+
+        }
+
+
+
+        /* used for x-axis movement (i - in ball_motion() API) */
+
+        for (i = 0; i < 4; i++) {
+
+                stage[i] = 0;
+
+        }
+
+        /* midy - mid of y axis */
+
+        midy = getmaxy() / 2;
+
+        /* max of y axis */
+
+        maxy = getmaxy();
+
+
+
+        /* initial position of 4 balls */
+
+        x[0] = 0, y[0] = 0;
+
+        x[1] = 150, y[1] = maxy;
+
+        x[2] = getmaxx() - 100, y[2] = midy;
+
+        x[3] = getmaxx(), y[3] = maxy;
+
+
+
+        /* movement of all 4 balls */
+
+        while (!kbhit()) {
+
+                /* clears graphic screeen */
+
+                cleardevice();
+
+
+
+                ball_motion(&x[0], &y[0], &flag[0], &stage[0], 0, 1);
+
+                ball_motion(&x[1], &y[1], &flag[1], &stage[1], midy, 1);
+
+                ball_motion(&x[2], &y[2], &flag[2], &stage[2], midy, 0);
+
+                ball_motion(&x[3], &y[3], &flag[3], &stage[3], 0, 0);
+
+
+
+                /* sleep for 25 milliseconds */
+
+                delay(25);
+
+        }
+
+
+
+        getch();
+
+
+
+        /* deallocate memory allocated for graphic screen */
+
+        closegraph();
+
+        return 0;
+
+  }
+
